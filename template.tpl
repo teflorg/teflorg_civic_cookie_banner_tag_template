@@ -5,12 +5,14 @@
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Civic Computing Cookie Control Banner",
+  "displayName": "Measurelab Civic Cookie Control Banner Tag",
+  "categories": ["ANALYTICS", "ADVERTISING", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
-    "displayName": ""
+    "displayName": "",
+    "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAFSUlEQVR4Xu2bXWhbZRjH/zk5bdO0aZM27VrdENyFiOhQtnnhBwz8AB0Ov4XhJ4ypc7uYWNj8ZgWH1VG8GN0YbBciu5goKhN3IUy80JtdKeLXYK5duzZrmzQfS3o+fN7kbZos2Zq004edPr9QDu9zTs4Jz+/keZ83h/pcAgIbht4KTIgAZkQAMyKAGRHAjAhgRgQwIwKYEQHMiABmRAAzIoAZEcCMCGBGBDAjApgRAcyIAGZEADMigBkRwIwIYEYEMCMCmBEBzIgAZkQAMyKAGRHAjAhgRgQwIwKYEQHMiABmRAAzIoAZEcBMTf8lOeMkMWlNYMIaQdjfhajZQ9t2vXd5Y7k2YpSbcessjXxYYa5Cp9kF01fbvX1FASeT3+KL6YPIOgk6tfq6GHDh0MtFgy+Iu1o34enIlsLBy4zR2REcvrAXI7nfKR8W/LqY2DQy0ICVjTfhxegu9Ji9+fjlqCpgzDqHgbEdlPgpBI0QJd+ATxnQqHe49Mq5aWRp8HJXP9Y0r9d7vc9QrB+nUifQRlXAD5NyU5IcQqXUJilxewrrWx7Blmif3lNJhYDh3BnsGX2eTt4Gv69BRy+P4zqYssfxXMd7uCd0v456lz2jW6kUn0azj27MSxJfiYu0M4MuczXe7h3SsXLKCpVFyRw4/2rBbA3JVxhU6zr8K/DpZD+GZ8/oqDc5HBvIJz9otNWQfIUvf+z47F84cmGfjpVTJuBA7H0KOJR8U0dqQ30YJW3/+C4d8R5/Zn/DT6mv83d+vSgJPye/wunsHzoyT7EETVjn8da5JxE2ojXarSRlx7Ex/ApuCaylb9Osjl77NBlBHIq9gwSV2uo358L5stwcVYpV2N27X0cKFAUcmzqAH5NfIkAXWzwuMk4GtmvpsXdoNpprLsvVUGmesafxwcrP0e6P6GiJgL1j26ifPUv96+IvUkD1R96jcI8vrjLMkSQBL0TfxdrgvTpSMgdknRSdfmkXKKDO4r3XUpOv8FHDkqGuqJTalmvCVePShBfHrVSX1Bp3qaiK5sm/q1BY1Zqp1ejQowLFOeB4/DN8lzhCk039bdYc6lQX3Ywn54AGWvEW5sfKUlRL06hyk3QS+Pj6bxDwB3S0REDGSWPn8MNoMyKLakPVaWacKWzvHsTNgTU01js8gErH4Hgf/sn+ikZjPnn1kHMuYnXgdmzr6teRAsUS1Ezt54bQM7R0TuhIfcy6WdzQdGs++Qr1ob3yp3i2ow9pN5W/0epFvSdDlWFz5HUdmadsTngqshVh8zrMkq16cFwbWVpo7Oj+UEe8R6cZxWPh12gxNln3fBC3Y3g8vJ1yO9//z1HRBb3Zewg2/NSWpmm08IXUCi/uTOONniFapi/u63mt8EDbE1gXeggJK0Z39cINizpm2prAnaFNuK/tUR0tpzgHlEGRTyZ245fMDwj5w4WfXMmVmhvU4YVnAg5NKnF0mzdiZ/e+qna9ysnkcRyd/AiNNCk30k2nnpPMzZsqPyo3OSo5OcfG5s4+3N36YH5fNaoL0KiHDkcnBzFq/Y20naQ6n6HleCNaqFOKmL3Y2P4Sbmtep49efhybOohT6e9p3kwWF1jq+Yn68e2Olg1UdhZ+WHVFAaVYdFiGJugmXwt1AvX9WrocSDup/DZotOS3tVKzAOG/oWISFv5fRAAzIoAZEcCMCGBGBDAjApgRAcyIAGZEADMigBkRwIwIYEYEMCMCmBEBzIgAZkQAMyKAGRHAjAhgRgQwIwKYEQHMiABmRAAzIoAZEcCMCGBGBDAjApgRAcyIAGZEADMigBkRwIwIYAX4F9/QVgZSsj4pAAAAAElFTkSuQmCC"
   },
-  "description": "Tag Template for injecting the Civic Computing Cookie Control banner",
+  "description": "The Measurelab Tag Template for deploying Civic\u0027s Cookie Control banner with Consent Mode directly through Google Tag Manager",
   "containerContexts": [
     "WEB"
   ]
@@ -25,7 +27,7 @@ ___TEMPLATE_PARAMETERS___
     "name": "apiKey",
     "displayName": "Civic Cookie Control API Key",
     "simpleValueType": true,
-    "help": "The API key of your Civic license.",
+    "help": "The API key of your Civic Cookie Control license.",
     "valueValidators": [
       {
         "type": "NON_EMPTY"
@@ -36,11 +38,15 @@ ___TEMPLATE_PARAMETERS___
     "type": "SELECT",
     "name": "product",
     "displayName": "Product",
-    "macrosInSelect": true,
+    "macrosInSelect": false,
     "selectItems": [
       {
         "value": "COMMUNITY",
         "displayValue": "Community"
+      },
+      {
+        "value": "CUSTOM",
+        "displayValue": "Custom"
       },
       {
         "value": "PRO",
@@ -49,10 +55,6 @@ ___TEMPLATE_PARAMETERS___
       {
         "value": "PRO_MULTISITE",
         "displayValue": "Pro Multisite"
-      },
-      {
-        "value": "CUSTOM",
-        "displayValue": "Custom"
       }
     ],
     "simpleValueType": true,
@@ -1072,6 +1074,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 24/10/2022, 10:50:02
+Created on 26/10/2022, 11:27:21
 
 
