@@ -1,18 +1,26 @@
-﻿___INFO___
+﻿___TERMS_OF_SERVICE___
+
+By creating or modifying this file you agree to Google Tag Manager's Community
+Template Gallery Developer Terms of Service available at
+https://developers.google.com/tag-manager/gallery-tos (or such other URL as
+Google may provide), as modified from time to time.
+
+
+___INFO___
 
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Measurelab Civic Cookie Control Banner Tag",
+  "displayName": "Measurelab Civic UK Cookie Control Banner Tag",
   "categories": ["ANALYTICS", "ADVERTISING", "MARKETING"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAFSUlEQVR4Xu2bXWhbZRjH/zk5bdO0aZM27VrdENyFiOhQtnnhBwz8AB0Ov4XhJ4ypc7uYWNj8ZgWH1VG8GN0YbBciu5goKhN3IUy80JtdKeLXYK5duzZrmzQfS3o+fN7kbZos2Zq004edPr9QDu9zTs4Jz+/keZ83h/pcAgIbht4KTIgAZkQAMyKAGRHAjAhgRgQwIwKYEQHMiABmRAAzIoAZEcCMCGBGBDAjApgRAcyIAGZEADMigBkRwIwIYEYEMCMCmBEBzIgAZkQAMyKAGRHAjAhgRgQwIwKYEQHMiABmRAAzIoAZEcBMTf8lOeMkMWlNYMIaQdjfhajZQ9t2vXd5Y7k2YpSbcessjXxYYa5Cp9kF01fbvX1FASeT3+KL6YPIOgk6tfq6GHDh0MtFgy+Iu1o34enIlsLBy4zR2REcvrAXI7nfKR8W/LqY2DQy0ICVjTfhxegu9Ji9+fjlqCpgzDqHgbEdlPgpBI0QJd+ATxnQqHe49Mq5aWRp8HJXP9Y0r9d7vc9QrB+nUifQRlXAD5NyU5IcQqXUJilxewrrWx7Blmif3lNJhYDh3BnsGX2eTt4Gv69BRy+P4zqYssfxXMd7uCd0v456lz2jW6kUn0azj27MSxJfiYu0M4MuczXe7h3SsXLKCpVFyRw4/2rBbA3JVxhU6zr8K/DpZD+GZ8/oqDc5HBvIJz9otNWQfIUvf+z47F84cmGfjpVTJuBA7H0KOJR8U0dqQ30YJW3/+C4d8R5/Zn/DT6mv83d+vSgJPye/wunsHzoyT7EETVjn8da5JxE2ojXarSRlx7Ex/ApuCaylb9Osjl77NBlBHIq9gwSV2uo358L5stwcVYpV2N27X0cKFAUcmzqAH5NfIkAXWzwuMk4GtmvpsXdoNpprLsvVUGmesafxwcrP0e6P6GiJgL1j26ifPUv96+IvUkD1R96jcI8vrjLMkSQBL0TfxdrgvTpSMgdknRSdfmkXKKDO4r3XUpOv8FHDkqGuqJTalmvCVePShBfHrVSX1Bp3qaiK5sm/q1BY1Zqp1ejQowLFOeB4/DN8lzhCk039bdYc6lQX3Ywn54AGWvEW5sfKUlRL06hyk3QS+Pj6bxDwB3S0REDGSWPn8MNoMyKLakPVaWacKWzvHsTNgTU01js8gErH4Hgf/sn+ikZjPnn1kHMuYnXgdmzr6teRAsUS1Ezt54bQM7R0TuhIfcy6WdzQdGs++Qr1ob3yp3i2ow9pN5W/0epFvSdDlWFz5HUdmadsTngqshVh8zrMkq16cFwbWVpo7Oj+UEe8R6cZxWPh12gxNln3fBC3Y3g8vJ1yO9//z1HRBb3Zewg2/NSWpmm08IXUCi/uTOONniFapi/u63mt8EDbE1gXeggJK0Z39cINizpm2prAnaFNuK/tUR0tpzgHlEGRTyZ245fMDwj5w4WfXMmVmhvU4YVnAg5NKnF0mzdiZ/e+qna9ysnkcRyd/AiNNCk30k2nnpPMzZsqPyo3OSo5OcfG5s4+3N36YH5fNaoL0KiHDkcnBzFq/Y20naQ6n6HleCNaqFOKmL3Y2P4Sbmtep49efhybOohT6e9p3kwWF1jq+Yn68e2Olg1UdhZ+WHVFAaVYdFiGJugmXwt1AvX9WrocSDup/DZotOS3tVKzAOG/oWISFv5fRAAzIoAZEcCMCGBGBDAjApgRAcyIAGZEADMigBkRwIwIYEYEMCMCmBEBzIgAZkQAMyKAGRHAjAhgRgQwIwKYEQHMiABmRAAzIoAZEcCMCGBGBDAjApgRAcyIAGZEADMigBkRwIwIYAX4F9/QVgZSsj4pAAAAAElFTkSuQmCC"
   },
-  "description": "The Measurelab Tag Template for deploying Civic\u0027s Cookie Control banner with Consent Mode directly through Google Tag Manager",
+  "description": "The Measurelab Tag Template for deploying Civic UK\u0027s Cookie Control banner with Consent Mode directly through Google Tag Manager\nSee the header in the Code section for disclaimers.",
   "containerContexts": [
     "WEB"
   ]
@@ -59,6 +67,164 @@ ___TEMPLATE_PARAMETERS___
     ],
     "simpleValueType": true,
     "help": "The product corresponding to your Civic license\u0027s plan."
+  },
+  {
+    "type": "GROUP",
+    "name": "privacyStatement",
+    "displayName": "Privacy Statement",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "privacyDescription",
+        "displayName": "Privacy Policy Description",
+        "simpleValueType": true,
+        "help": "The text description that introduces your privacy policy."
+      },
+      {
+        "type": "TEXT",
+        "name": "privacyLabel",
+        "displayName": "Privacy Policy Text Label",
+        "simpleValueType": true,
+        "help": "The text label that best describes your privacy policy and is included within the HTML link element."
+      },
+      {
+        "type": "TEXT",
+        "name": "privacyURL",
+        "displayName": "Privacy Policy URL",
+        "simpleValueType": true,
+        "help": "The URL where your privacy policy may be publicly accessed. The HTML link element will try to open in a new tab, so it may point to a PDF document if you wish without closing the user\u0027s access to your site.",
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "privacyUpdated",
+        "displayName": "Privacy Policy Issue Date",
+        "simpleValueType": true,
+        "help": "The date that your privacy policy was last issued, in the format of dd/mm/yyyy.",
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          },
+          {
+            "type": "REGEX",
+            "args": [
+              "^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "consentMode",
+    "displayName": "Consent Mode Settings",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "PARAM_TABLE",
+        "name": "defaultSettings",
+        "displayName": "Default Consent Settings",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "region",
+              "displayName": "Region (leave blank to have consent apply to all regions)",
+              "simpleValueType": true
+            },
+            "isUnique": true
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "granted",
+              "displayName": "Granted Consent Types (comma separated)",
+              "simpleValueType": true
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "denied",
+              "displayName": "Denied Consent Types (comma separated)",
+              "simpleValueType": true
+            },
+            "isUnique": false
+          }
+        ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "adsDataRedaction",
+        "checkboxText": "Redact Ads Data",
+        "simpleValueType": true
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "cookiesCategories",
+    "displayName": "Cookie Categories",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "analyticsLabel",
+        "displayName": "Analytics Cookies Label",
+        "simpleValueType": true,
+        "defaultValue": "Analytics Cookies"
+      },
+      {
+        "type": "TEXT",
+        "name": "analyticsDescription",
+        "displayName": "Analytics Cookies Description",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "analyticsCookies",
+        "displayName": "Comma-delimted list of analytics cookie names",
+        "simpleValueType": true,
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ],
+        "help": "The names of the analytics cookies that you wish to protect after a user opts in."
+      },
+      {
+        "type": "TEXT",
+        "name": "marketingLabel",
+        "displayName": "Marketing Cookies Label",
+        "simpleValueType": true,
+        "defaultValue": "Marketing Cookies"
+      },
+      {
+        "type": "TEXT",
+        "name": "marketingDescription",
+        "displayName": "Marketing Cookies Description",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "marketingCookies",
+        "displayName": "Comma-delimted list of marketing cookie names",
+        "simpleValueType": true,
+        "help": "The names of the marketing cookies that you wish to protect after a user opts in.",
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
+      }
+    ]
   },
   {
     "type": "GROUP",
@@ -505,6 +671,16 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
+/*
+ *  Measurelab does not own, maintain, update or have any legal claim to the
+ *  Civic Cookie Control code base - nor as to the effectiveness of any
+ *  particular implementation regarding compliance to the UK ICO’s directives
+ *  and GDPR legislation. For information on how Civic Cookie Control works,
+ *  and for updates on functionality please refer directly to Civics documentation
+ *  which can be found here: https://www.civicuk.com/cookie-control/documentation/
+ */
+
+
 // Require the necessary APIs
 const logToConsole = require('logToConsole');
 const injectScript = require('injectScript');
@@ -518,6 +694,7 @@ const queryPermission = require('queryPermission');
 const createQueue = require('createQueue');
 const isConsentGranted = require('isConsentGranted');
 const JSON = require('JSON');
+const gtagSet = require('gtagSet');
 
 // If the user chose to log debug output, initialize the logging method
 const log = data.debug ? logToConsole : (() => {});
@@ -533,21 +710,15 @@ const COOKIE_NAME = 'CookieControl';
 
 log(data);
 
-// Set default consent mode state
+// Set default consent mode state(s)
 const setDefault = () => {
-  setDefaultConsentState({
-    'ad_storage': 'denied',
-    'analytics_storage': 'denied',
+  data.defaultSettings.forEach(settings => {
+    const defaultData = parseCommandData(settings);
+    defaultData.wait_for_update = 500;
+    setDefaultConsentState(defaultData);
   });
-  dataLayerPush({
-    'event': 'consentDefault',
-    'analytics_storage': 'denied',
-    'ad_storage': 'denied',
-    'consent_type': 'default'
-  });
+  gtagSet('ads_data_redaction', data.adsDataRedaction);
 };
-
-setDefault();
 
 // Check for existing Civic cookie settings
 const checkCookie = () => {
@@ -562,6 +733,33 @@ const checkCookie = () => {
   }
 };
 
+// Splits the input string using comma as a delimiter, returning an array of strings
+const splitInput = (input) => {
+  return input.split(',')
+    .map(entry => entry.trim())
+    .filter(entry => entry.length !== 0);
+};
+
+// Processes a row of input from the default settings table, returning an
+// object which can be passed as an argument to setDefaultConsentState
+const parseCommandData = (settings) => {
+  const regions = splitInput(settings.region);
+  const granted = splitInput(settings.granted);
+  const denied = splitInput(settings.denied);
+  const commandData = {};
+  if (regions.length > 0) {
+    commandData.region = regions;
+  }
+  granted.forEach(entry => {
+    commandData[entry] = 'granted';
+  });
+  denied.forEach(entry => {
+    commandData[entry] = 'denied';
+  });
+  return commandData;
+};
+
+setDefault();
 checkCookie();
 
 log('Civic Computing: Loading script from ' + url);
@@ -616,38 +814,34 @@ let config = {
   toggleType: data.toggleType,
   acceptBehaviour: data.acceptBehaviour,
   statement: {
-    description: "For more detailed information about the cookies we use, see our",
-    name: "Privacy Policy.",
-    url: "/privacy-policy/",
-    updated: "10/02/2022"
+    description: data.privacyDescription,
+    name: data.privacyLabel,
+    url: data.privacyURL,
+    updated: data.privacyUpdated
   },
   optionalCookies: [{
-      name: 'analytics',
-      label: 'Analytical Cookies',
-      description: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.',
-      cookies: ['_ga*', 'gac', '_gid', '_gat*', '__utma', '__utmt', '__utmb', '__utmc', '__utmz', '__utmv', 'MUID', 'ANONCHK', '__hstc',
-        'hubspotutk', '__cf_bm', '__hssc', '__hssrc', 'CLID', 'FPLC', 'FPID', 'dc_gtm', 'Sm', '_clck', '_clsk'
-      ],
-      onAccept: function () {
-        onUserConsent('analytics_storage', 'granted');
-      },
-      onRevoke: function () {
-        onUserConsent('analytics_storage', 'denied');
-      }
+    name: 'analytics',
+    label: data.analyticsLabel ? data.analyticsLabel : 'Analytical Cookies',
+    description: data.analyticsDescription ? data.analyticsDescription: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.',
+    cookies: splitInput(data.analyticsCookies),
+    onAccept: function () {
+      onUserConsent('analytics_storage', 'granted');
     },
-    {
-      name: 'marketing',
-      label: 'Marketing Cookies',
-      description: 'We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.',
-      cookies: ['fr', 'MUID', 'ANONCHK', '_gcl_au', 'SRM_B'],
-      onAccept: function () {
-        onUserConsent('ad_storage', 'granted');
-      },
-      onRevoke: function () {
-        onUserConsent('ad_storage', 'denied');
-      },
+    onRevoke: function () {
+      onUserConsent('analytics_storage', 'denied');
+    }
+  },{
+    name: 'marketing',
+    label: data.marketingLabel ? data.marketingLabel : 'Marketing Cookies',
+    description: data.marketingDescription ? data.marketingDescription : 'We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.',
+    cookies: splitInput(data.marketingCookies),
+    onAccept: function () {
+      onUserConsent('ad_storage', 'granted');
     },
-  ],
+    onRevoke: function () {
+      onUserConsent('ad_storage', 'denied');
+    },
+  }],
 };
 
 // Set banner initial state in config dependent on URL pathname
@@ -992,6 +1186,37 @@ ___WEB_PERMISSIONS___
                     "boolean": true
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "wait_for_update"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
               }
             ]
           }
@@ -1063,6 +1288,32 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "write_data_layer",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "keyPatterns",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 1,
+                "string": "ads_data_redaction"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
   }
 ]
 
@@ -1074,6 +1325,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 26/10/2022, 11:27:21
+Created on 16/11/2022, 11:15:55
 
 
