@@ -1,4 +1,4 @@
 homepage: "https://www.measurelab.co.uk/"
 versions:
-  - sha: CHANGEME
-    changeNotes: CHANGEME
+  - sha: d83c4e8ca2290bc4f853a5464154f062bdb67c0c
+    changeNotes: Initial release
