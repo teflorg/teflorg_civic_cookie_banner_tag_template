@@ -14,7 +14,7 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Measurelab Civic UK Cookie Control Banner Tag",
-  "categories": ["ANALYTICS", "ADVERTISING", "MARKETING"],
+  "categories": ["ANALYTICS", "ADVERTISING", "UTILITY"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -162,6 +162,12 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
+        "name": "urlPassthrough",
+        "checkboxText": "Pass Ad Click Information Through URLs",
+        "simpleValueType": true
+      },
+      {
+        "type": "CHECKBOX",
         "name": "adsDataRedaction",
         "checkboxText": "Redact Ads Data",
         "simpleValueType": true
@@ -190,7 +196,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "analyticsCookies",
-        "displayName": "Comma-delimted list of analytics cookie names",
+        "displayName": "Comma-delimited list of analytics cookie names",
         "simpleValueType": true,
         "valueValidators": [
           {
@@ -215,7 +221,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "marketingCookies",
-        "displayName": "Comma-delimted list of marketing cookie names",
+        "displayName": "Comma-delimited list of marketing cookie names",
         "simpleValueType": true,
         "help": "The names of the marketing cookies that you wish to protect after a user opts in.",
         "valueValidators": [
@@ -717,7 +723,10 @@ const setDefault = () => {
     defaultData.wait_for_update = 500;
     setDefaultConsentState(defaultData);
   });
-  gtagSet('ads_data_redaction', data.adsDataRedaction);
+  gtagSet({
+    'url_passthrough': data.urlPassthrough || false,
+    'ads_data_redaction': data.adsDataRedaction || false,
+  });
 };
 
 // Check for existing Civic cookie settings
@@ -729,6 +738,8 @@ const checkCookie = () => {
     updateConsentState({
       'ad_storage': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
       'analytics_storage': settingsObj.analytics === 'accepted' ? 'granted' : 'denied',
+      'ad_user_data': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
+      'ad_personalization': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
     });
   }
 };
@@ -781,12 +792,14 @@ const onFailure = () => {
 // directly correspond to Google consent types.
 const onUserConsent = (consent, state) => {
   let consentModeStates = {};
-  consentModeStates[consent] = state;
+  consent.forEach((c) => {
+    consentModeStates[c] = state;
+  });
   updateConsentState(consentModeStates);
   dataLayerPush({
     'event': 'consentUpdate',
     'state': state,
-    'cookie_type': consent,
+    'cookie_type': consent.join(', '),
     'consent_type': 'update'
   });
 };
@@ -825,10 +838,10 @@ let config = {
     description: data.analyticsDescription ? data.analyticsDescription: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.',
     cookies: splitInput(data.analyticsCookies),
     onAccept: function () {
-      onUserConsent('analytics_storage', 'granted');
+      onUserConsent(['analytics_storage'], 'granted');
     },
     onRevoke: function () {
-      onUserConsent('analytics_storage', 'denied');
+      onUserConsent(['analytics_storage'], 'denied');
     }
   },{
     name: 'marketing',
@@ -836,10 +849,10 @@ let config = {
     description: data.marketingDescription ? data.marketingDescription : 'We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.',
     cookies: splitInput(data.marketingCookies),
     onAccept: function () {
-      onUserConsent('ad_storage', 'granted');
+      onUserConsent(['ad_storage', 'ad_user_data', 'ad_personalization'], 'granted');
     },
     onRevoke: function () {
-      onUserConsent('ad_storage', 'denied');
+      onUserConsent(['ad_storage', 'ad_user_data', 'ad_personalization'], 'denied');
     },
   }],
 };
@@ -1206,6 +1219,99 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
+                    "string": "security_storage"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "ad_user_data"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "ad_personalization"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
                     "string": "wait_for_update"
                   },
                   {
@@ -1303,6 +1409,10 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
+                "string": "url_passthrough"
+              },
+              {
+                "type": 1,
                 "string": "ads_data_redaction"
               }
             ]
@@ -1321,10 +1431,11 @@ ___WEB_PERMISSIONS___
 ___TESTS___
 
 scenarios: []
+setup: ''
 
 
 ___NOTES___
 
-Created on 16/11/2022, 11:15:55
+Created on 06/12/2023, 16:08:02
 
 
