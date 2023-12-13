@@ -791,10 +791,23 @@ const onFailure = () => {
 // Called when consent changes. Assumes that consent object contains keys which
 // directly correspond to Google consent types.
 const onUserConsent = (consent, state) => {
+  log(consent);
+  log(state);
+  if (!!consent && consent.indexOf('analytics_storage') > -1) {
+    if ((isConsentGranted('analytics_storage') && state === 'granted') || (!isConsentGranted('analytics_storage') && state === 'denied')) {
+      return;
+    }
+  } else if (!!consent && consent.indexOf('ad_storage') > -1) {
+    if ((isConsentGranted('ad_storage') && state === 'granted') || (!isConsentGranted('ad_storage') && state === 'denied')) {
+      return;
+    }
+  }
+  
   let consentModeStates = {};
   consent.forEach((c) => {
     consentModeStates[c] = state;
   });
+  
   updateConsentState(consentModeStates);
   dataLayerPush({
     'event': 'consentUpdate',
@@ -1436,6 +1449,6 @@ setup: ''
 
 ___NOTES___
 
-Created on 06/12/2023, 16:08:02
+Created on 08/12/2023, 15:32:47
 
 
