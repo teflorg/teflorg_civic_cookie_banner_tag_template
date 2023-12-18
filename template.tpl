@@ -14,7 +14,11 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Measurelab Civic UK Cookie Control Banner Tag",
-  "categories": ["ANALYTICS", "ADVERTISING", "UTILITY"],
+  "categories": [
+    "ANALYTICS",
+    "ADVERTISING",
+    "UTILITY"
+  ],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -180,6 +184,14 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "Cookie Categories",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
+      {
+        "type": "TEXT",
+        "name": "necessaryCookies",
+        "displayName": "Comma-delimited list of necessary cookie names",
+        "simpleValueType": true,
+        "valueValidators": [],
+        "help": "The names of any necessary cookies that you wish to protect from being automatically wiped"
+      },
       {
         "type": "TEXT",
         "name": "analyticsLabel",
@@ -746,6 +758,9 @@ const checkCookie = () => {
 
 // Splits the input string using comma as a delimiter, returning an array of strings
 const splitInput = (input) => {
+  if (!input) {
+    return [];
+  }
   return input.split(',')
     .map(entry => entry.trim())
     .filter(entry => entry.length !== 0);
@@ -845,6 +860,7 @@ let config = {
     url: data.privacyURL,
     updated: data.privacyUpdated
   },
+  necessaryCookies: splitInput(data.necessaryCookies),
   optionalCookies: [{
     name: 'analytics',
     label: data.analyticsLabel ? data.analyticsLabel : 'Analytical Cookies',
