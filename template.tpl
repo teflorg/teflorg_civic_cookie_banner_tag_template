@@ -253,33 +253,45 @@ ___TEMPLATE_PARAMETERS___
         "displayName": "Optional Cookies"
       },
       {
-        "type": "SIMPLE_TABLE",
+        "type": "PARAM_TABLE",
         "name": "optionalCookies",
         "displayName": "Optional Cookie Categories",
-        "simpleTableColumns": [
+        "paramTableColumns": [
           {
-            "defaultValue": "",
-            "displayName": "Label",
-            "name": "optCatLabel",
-            "type": "TEXT"
+            "param": {
+              "type": "TEXT",
+              "name": "optCatLabel",
+              "displayName": "Label",
+              "simpleValueType": true
+            },
+            "isUnique": true
           },
           {
-            "defaultValue": "",
-            "displayName": "Description",
-            "name": "optCatDescription",
-            "type": "TEXT"
+            "param": {
+              "type": "TEXT",
+              "name": "optCatDescription",
+              "displayName": "Description",
+              "simpleValueType": true
+            },
+            "isUnique": true
           },
           {
-            "defaultValue": "",
-            "displayName": "Cookies",
-            "name": "optCatCookies",
-            "type": "TEXT"
+            "param": {
+              "type": "TEXT",
+              "name": "optCatCookies",
+              "displayName": "Cookies",
+              "simpleValueType": true
+            },
+            "isUnique": false
           },
           {
-            "defaultValue": "",
-            "displayName": "Storage",
-            "name": "storage",
-            "type": "TEXT"
+            "param": {
+              "type": "TEXT",
+              "name": "storage",
+              "displayName": "Storage",
+              "simpleValueType": true
+            },
+            "isUnique": false
           }
         ]
       }
@@ -717,6 +729,13 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "defaultValue": false
       }
+    ],
+    "enablingConditions": [
+      {
+        "paramName": "product",
+        "paramValue": "COMMUNITY",
+        "type": "NOT_EQUALS"
+      }
     ]
   },
   {
@@ -878,6 +897,7 @@ const onFailure = () => {
 const onUserConsent = (consent, state) => {
   log(consent);
   log(state);
+  /*
   if (!!consent && consent.indexOf('analytics_storage') > -1) {
     if ((isConsentGranted('analytics_storage') && state === 'granted') || (!isConsentGranted('analytics_storage') && state === 'denied')) {
       return;
@@ -886,6 +906,20 @@ const onUserConsent = (consent, state) => {
     if ((isConsentGranted('ad_storage') && state === 'granted') || (!isConsentGranted('ad_storage') && state === 'denied')) {
       return;
     }
+  }
+  */
+  
+  let consentStateChangeDetected = 0;
+  if (!!consent && consent.length > 0) {
+    for (let i = 0; i < consent.length; i++) {
+      if ((!isConsentGranted(consent[i]) && state === 'granted') || (isConsentGranted(consent[i]) && state === 'denied')) {
+        consentStateChangeDetected++;
+      }
+    }
+  }
+  
+  if (consentStateChangeDetected === 0) {
+    return;
   }
   
   let consentModeStates = {};
