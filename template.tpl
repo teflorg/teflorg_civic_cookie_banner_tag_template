@@ -131,38 +131,88 @@ ___TEMPLATE_PARAMETERS___
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
-        "type": "PARAM_TABLE",
-        "name": "defaultSettings",
-        "displayName": "Default Consent Settings",
-        "paramTableColumns": [
+        "type": "SELECT",
+        "name": "analyticsStorageDefault",
+        "displayName": "analytics_storage",
+        "macrosInSelect": true,
+        "selectItems": [
           {
-            "param": {
-              "type": "TEXT",
-              "name": "region",
-              "displayName": "Region (leave blank to have consent apply to all regions)",
-              "simpleValueType": true
-            },
-            "isUnique": true
+            "value": "granted",
+            "displayValue": "granted"
           },
           {
-            "param": {
-              "type": "TEXT",
-              "name": "granted",
-              "displayName": "Granted Consent Types (comma separated)",
-              "simpleValueType": true
-            },
-            "isUnique": false
-          },
-          {
-            "param": {
-              "type": "TEXT",
-              "name": "denied",
-              "displayName": "Denied Consent Types (comma separated)",
-              "simpleValueType": true
-            },
-            "isUnique": false
+            "value": "denied",
+            "displayValue": "denied"
           }
-        ]
+        ],
+        "simpleValueType": true,
+        "defaultValue": "denied"
+      },
+      {
+        "type": "SELECT",
+        "name": "adStorageDefault",
+        "displayName": "ad_storage",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": "granted",
+            "displayValue": "granted"
+          },
+          {
+            "value": "denied",
+            "displayValue": "denied"
+          }
+        ],
+        "simpleValueType": true,
+        "defaultValue": "denied"
+      },
+      {
+        "type": "SELECT",
+        "name": "adUserDataDefault",
+        "displayName": "ad_user_data",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": "granted",
+            "displayValue": "granted"
+          },
+          {
+            "value": "denied",
+            "displayValue": "denied"
+          }
+        ],
+        "simpleValueType": true,
+        "defaultValue": "denied"
+      },
+      {
+        "type": "SELECT",
+        "name": "adPersonalizationDefault",
+        "displayName": "ad_personalization",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": "granted",
+            "displayValue": "granted"
+          },
+          {
+            "value": "denied",
+            "displayValue": "denied"
+          }
+        ],
+        "simpleValueType": true,
+        "defaultValue": "denied"
+      },
+      {
+        "type": "TEXT",
+        "name": "otherGrantedDefault",
+        "displayName": "Additional granted storage types",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "otherDeniedDefault",
+        "displayName": "Additional denied storage types",
+        "simpleValueType": true
       },
       {
         "type": "CHECKBOX",
@@ -185,6 +235,11 @@ ___TEMPLATE_PARAMETERS___
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
+        "type": "LABEL",
+        "name": "necessaryCookiesLabel",
+        "displayName": "Necessary Cookies"
+      },
+      {
         "type": "TEXT",
         "name": "necessaryCookies",
         "displayName": "Comma-delimited list of necessary cookie names",
@@ -193,52 +248,38 @@ ___TEMPLATE_PARAMETERS___
         "help": "The names of any necessary cookies that you wish to protect from being automatically wiped"
       },
       {
-        "type": "TEXT",
-        "name": "analyticsLabel",
-        "displayName": "Analytics Cookies Label",
-        "simpleValueType": true,
-        "defaultValue": "Analytics Cookies"
+        "type": "LABEL",
+        "name": "optionalCookiesLabel",
+        "displayName": "Optional Cookies"
       },
       {
-        "type": "TEXT",
-        "name": "analyticsDescription",
-        "displayName": "Analytics Cookies Description",
-        "simpleValueType": true
-      },
-      {
-        "type": "TEXT",
-        "name": "analyticsCookies",
-        "displayName": "Comma-delimited list of analytics cookie names",
-        "simpleValueType": true,
-        "valueValidators": [
+        "type": "SIMPLE_TABLE",
+        "name": "optionalCookies",
+        "displayName": "Optional Cookie Categories",
+        "simpleTableColumns": [
           {
-            "type": "NON_EMPTY"
-          }
-        ],
-        "help": "The names of the analytics cookies that you wish to protect after a user opts in."
-      },
-      {
-        "type": "TEXT",
-        "name": "marketingLabel",
-        "displayName": "Marketing Cookies Label",
-        "simpleValueType": true,
-        "defaultValue": "Marketing Cookies"
-      },
-      {
-        "type": "TEXT",
-        "name": "marketingDescription",
-        "displayName": "Marketing Cookies Description",
-        "simpleValueType": true
-      },
-      {
-        "type": "TEXT",
-        "name": "marketingCookies",
-        "displayName": "Comma-delimited list of marketing cookie names",
-        "simpleValueType": true,
-        "help": "The names of the marketing cookies that you wish to protect after a user opts in.",
-        "valueValidators": [
+            "defaultValue": "",
+            "displayName": "Label",
+            "name": "optCatLabel",
+            "type": "TEXT"
+          },
           {
-            "type": "NON_EMPTY"
+            "defaultValue": "",
+            "displayName": "Description",
+            "name": "optCatDescription",
+            "type": "TEXT"
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Cookies",
+            "name": "optCatCookies",
+            "type": "TEXT"
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Storage",
+            "name": "storage",
+            "type": "TEXT"
           }
         ]
       }
@@ -712,6 +753,7 @@ const queryPermission = require('queryPermission');
 const createQueue = require('createQueue');
 const isConsentGranted = require('isConsentGranted');
 const JSON = require('JSON');
+const Object = require('Object');
 const gtagSet = require('gtagSet');
 
 // If the user chose to log debug output, initialize the logging method
@@ -730,11 +772,25 @@ log(data);
 
 // Set default consent mode state(s)
 const setDefault = () => {
-  data.defaultSettings.forEach(settings => {
-    const defaultData = parseCommandData(settings);
-    defaultData.wait_for_update = 500;
-    setDefaultConsentState(defaultData);
-  });
+  // log(data.defaultSettings);
+  // data.defaultSettings.forEach(settings => {
+  //   const defaultData = parseCommandData(settings);
+  //   defaultData.wait_for_update = 500;
+  //   setDefaultConsentState(defaultData);
+  // });
+  const defaultSettings = {};
+  defaultSettings.analytics_storage = data.analyticsStorageDefault;
+  defaultSettings.ad_storage = data.adStorageDefault;
+  defaultSettings.ad_user_data = data.adUserDataDefault;
+  defaultSettings.ad_personalization = data.adPersonalizationDefault;
+  if (!!data.otherGrantedDefault) {
+    splitInput(data.otherGrantedDefault).forEach( storage => defaultSettings[storage] = 'granted');
+  }
+  if (!!data.otherDeniedDefault) {
+    splitInput(data.otherDeniedDefault).forEach( storage => defaultSettings[storage] = 'denied');
+  }
+  defaultSettings.wait_for_update = 500;
+  setDefaultConsentState(defaultSettings);
   gtagSet({
     'url_passthrough': data.urlPassthrough || false,
     'ads_data_redaction': data.adsDataRedaction || false,
@@ -745,14 +801,28 @@ const setDefault = () => {
 const checkCookie = () => {
   const settings = getCookieValues(COOKIE_NAME);
   if (typeof settings !== 'undefined' && (typeof settings === 'object' && settings.length > 0)) {
-    log(settings.length);
     const settingsObj = JSON.parse(settings[0]).optionalCookies;
+    const optionalCookiesConfig = data.optionalCookies;
+    const categoryDefinitions = {};
+    if (!!optionalCookiesConfig) {
+      optionalCookiesConfig.forEach(config => { categoryDefinitions[config.optCatLabel.toLowerCase().replace(' ','_').trim()] = config.storage; });
+    }
+    const updateObj = {};
+    Object.entries(settingsObj).forEach(entry => {
+      const categoryName = entry[0] || '';
+      const consentState = entry[1] === 'accepted' ? 'granted' : 'denied';
+      const storages = categoryDefinitions[entry[0]].split(',');
+      storages.forEach(storage => { updateObj[storage] = consentState; });
+    });
+    updateConsentState(updateObj);
+    /*
     updateConsentState({
-      'ad_storage': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
       'analytics_storage': settingsObj.analytics === 'accepted' ? 'granted' : 'denied',
+      'ad_storage': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
       'ad_user_data': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
       'ad_personalization': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
     });
+    */
   }
 };
 
@@ -842,6 +912,26 @@ const loadCookieControl = (config) => {
   }
 };
 
+const optionalCookieCategories = (arr) => {
+  log(arr);
+  const optionalCookies = [];
+  if (!!arr) {
+    arr.forEach(category => {
+      const obj = {};
+      obj.name = category.optCatLabel.toLowerCase().replace(' ','_').trim();
+      obj.label = category.optCatLabel;
+      obj.description = category.optCatDescription;
+      obj.cookies = category.optCatCookies.split(',');
+      const args = category.storage.split(',');
+      obj.onAccept = function () { onUserConsent(args, 'granted'); };
+      obj.onRevoke = function () { onUserConsent(args, 'denied'); };
+      log(obj);
+      optionalCookies.push(obj);
+    });
+  }
+  return optionalCookies;
+};
+
 // Civic config object
 let config = {
   apiKey: data.apiKey,
@@ -861,6 +951,8 @@ let config = {
     updated: data.privacyUpdated
   },
   necessaryCookies: splitInput(data.necessaryCookies),
+  optionalCookies: optionalCookieCategories(data.optionalCookies),
+  /*
   optionalCookies: [{
     name: 'analytics',
     label: data.analyticsLabel ? data.analyticsLabel : 'Analytical Cookies',
@@ -884,6 +976,7 @@ let config = {
       onUserConsent(['ad_storage', 'ad_user_data', 'ad_personalization'], 'denied');
     },
   }],
+  */
 };
 
 // Set banner initial state in config dependent on URL pathname
@@ -933,6 +1026,9 @@ if (queryPermission('access_globals', 'readwrite', 'config')) {
   log('Civic Computing: Setting config variable failed due to permissions mismatch.');
   data.gtmOnFailure();
 }
+
+// Call data.gtmOnSuccess when the tag is finished.
+data.gtmOnSuccess();
 
 
 ___WEB_PERMISSIONS___
@@ -1352,6 +1448,37 @@ ___WEB_PERMISSIONS___
                     "boolean": true
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "personalization_storage"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
               }
             ]
           }
@@ -1459,8 +1586,59 @@ ___WEB_PERMISSIONS___
 
 ___TESTS___
 
-scenarios: []
-setup: ''
+scenarios:
+- name: setDefaultConsentState test
+  code: |-
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('setDefaultConsentState').wasCalledWith({
+      analytics_storage: 'denied',
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'denied',
+      personalization_storage: 'granted',
+      functionality_storage: 'granted',
+      security_storage: 'denied',
+      wait_for_update: 500
+    });
+
+    assertApi('gtmOnSuccess').wasCalled();
+- name: updateConsentState test
+  code: |-
+    // Simulate getCookieValues function call result
+    mock('getCookieValues', ['{"necessaryCookies":[],"optionalCookies":{"analytics_cookies":"accepted","marketing_cookies":"accepted","test":"accepted"},"statement":{"shown":true,"updated":"10/02/2022"},"consentDate":1703174608142,"consentExpiry":90,"interactedWith":true,"user":"C411DC12-1A6D-4F2B-9A52-883A58616A00"}']);
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('updateConsentState').wasCalledWith({
+      ad_personalization: "granted",
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      analytics_storage: "granted",
+      security_storage: "granted"
+    });
+
+    assertApi('gtmOnSuccess').wasCalled();
+setup: |-
+  const mockData = {
+    // Mocked field values
+    analyticsStorageDefault: 'denied',
+    adStorageDefault: 'granted',
+    adUserDataDefault: 'granted',
+    adPersonalizationDefault: 'denied',
+    otherGrantedDefault: 'functionality_storage,personalization_storage',
+    otherDeniedDefault: 'security_storage',
+    urlPassthrough: true,
+    adsDataRedaction: true,
+    optionalCookies:[
+      {"optCatLabel":"Analytics Cookies","optCatDescription":"asdasd","optCatCookies":"asdasd","storage":"analytics_storage"},
+      {"optCatLabel":"Marketing Cookies","optCatDescription":"bbbbbbbbb","optCatCookies":"bbbbbbb","storage":"ad_storage,ad_user_data,ad_personalization"},
+      {"optCatLabel":"Test","optCatDescription":"ccccccccccccc","optCatCookies":"cccccccccc","storage":"security_storage"}],
+  };
 
 
 ___NOTES___
