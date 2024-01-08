@@ -1,4 +1,14 @@
 homepage: "https://www.measurelab.co.uk/"
 versions:
+  # Latest version
+  - sha: 2b7f99b5bf867a9bb641eb249ad2c94cdecbdf1c
+    changeNotes: |2
+      Overhauled template interface design.
+      Works with Consent Mode V2 storage types.
+      analytics and ad storages set via dropdown and must have a value.
+      Necessary cookies field added.
+      Optional cookie categories no longer fixed to Analytics and Marketing.
+      Tests added.
+  # Older versions
   - sha: fcd40dfee36c5fad57abbde988c043787944311b
     changeNotes: Initial release
