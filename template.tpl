@@ -791,12 +791,6 @@ log(data);
 
 // Set default consent mode state(s)
 const setDefault = () => {
-  // log(data.defaultSettings);
-  // data.defaultSettings.forEach(settings => {
-  //   const defaultData = parseCommandData(settings);
-  //   defaultData.wait_for_update = 500;
-  //   setDefaultConsentState(defaultData);
-  // });
   const defaultSettings = {};
   defaultSettings.analytics_storage = data.analyticsStorageDefault;
   defaultSettings.ad_storage = data.adStorageDefault;
@@ -830,18 +824,10 @@ const checkCookie = () => {
     Object.entries(settingsObj).forEach(entry => {
       const categoryName = entry[0] || '';
       const consentState = entry[1] === 'accepted' ? 'granted' : 'denied';
-      const storages = categoryDefinitions[entry[0]].split(',');
+      const storages = categoryDefinitions.hasOwnProperty(entry[0]) ? categoryDefinitions[entry[0]].split(',') : [];
       storages.forEach(storage => { updateObj[storage] = consentState; });
     });
     updateConsentState(updateObj);
-    /*
-    updateConsentState({
-      'analytics_storage': settingsObj.analytics === 'accepted' ? 'granted' : 'denied',
-      'ad_storage': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
-      'ad_user_data': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
-      'ad_personalization': settingsObj.marketing === 'accepted' ? 'granted' : 'denied',
-    });
-    */
   }
 };
 
@@ -897,17 +883,6 @@ const onFailure = () => {
 const onUserConsent = (consent, state) => {
   log(consent);
   log(state);
-  /*
-  if (!!consent && consent.indexOf('analytics_storage') > -1) {
-    if ((isConsentGranted('analytics_storage') && state === 'granted') || (!isConsentGranted('analytics_storage') && state === 'denied')) {
-      return;
-    }
-  } else if (!!consent && consent.indexOf('ad_storage') > -1) {
-    if ((isConsentGranted('ad_storage') && state === 'granted') || (!isConsentGranted('ad_storage') && state === 'denied')) {
-      return;
-    }
-  }
-  */
   
   let consentStateChangeDetected = 0;
   if (!!consent && consent.length > 0) {
@@ -986,35 +961,11 @@ let config = {
   },
   necessaryCookies: splitInput(data.necessaryCookies),
   optionalCookies: optionalCookieCategories(data.optionalCookies),
-  /*
-  optionalCookies: [{
-    name: 'analytics',
-    label: data.analyticsLabel ? data.analyticsLabel : 'Analytical Cookies',
-    description: data.analyticsDescription ? data.analyticsDescription: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.',
-    cookies: splitInput(data.analyticsCookies),
-    onAccept: function () {
-      onUserConsent(['analytics_storage'], 'granted');
-    },
-    onRevoke: function () {
-      onUserConsent(['analytics_storage'], 'denied');
-    }
-  },{
-    name: 'marketing',
-    label: data.marketingLabel ? data.marketingLabel : 'Marketing Cookies',
-    description: data.marketingDescription ? data.marketingDescription : 'We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.',
-    cookies: splitInput(data.marketingCookies),
-    onAccept: function () {
-      onUserConsent(['ad_storage', 'ad_user_data', 'ad_personalization'], 'granted');
-    },
-    onRevoke: function () {
-      onUserConsent(['ad_storage', 'ad_user_data', 'ad_personalization'], 'denied');
-    },
-  }],
-  */
 };
 
 // Set banner initial state in config dependent on URL pathname
-if (getUrl('path') == '/privacy-policy/') {
+log(data.privacyURL);
+if (getUrl('path') == data.privacyURL) {
   config.initialState = 'closed';
 } else {
   config.initialState = 'open';
@@ -1642,7 +1593,7 @@ scenarios:
 - name: updateConsentState test
   code: |-
     // Simulate getCookieValues function call result
-    mock('getCookieValues', ['{"necessaryCookies":[],"optionalCookies":{"analytics_cookies":"accepted","marketing_cookies":"accepted","test":"accepted"},"statement":{"shown":true,"updated":"10/02/2022"},"consentDate":1703174608142,"consentExpiry":90,"interactedWith":true,"user":"C411DC12-1A6D-4F2B-9A52-883A58616A00"}']);
+    mock('getCookieValues', ['{"necessaryCookies":[],"optionalCookies":{"analytical_cookies":"accepted","marketing_cookies":"accepted","test":"accepted"},"statement":{"shown":true,"updated":"10/02/2022"},"consentDate":1703174608142,"consentExpiry":90,"interactedWith":true,"user":"C411DC12-1A6D-4F2B-9A52-883A58616A00"}']);
 
     // Call runCode to run the template's code.
     runCode(mockData);
@@ -1669,9 +1620,10 @@ setup: |-
     urlPassthrough: true,
     adsDataRedaction: true,
     optionalCookies:[
-      {"optCatLabel":"Analytics Cookies","optCatDescription":"asdasd","optCatCookies":"asdasd","storage":"analytics_storage"},
-      {"optCatLabel":"Marketing Cookies","optCatDescription":"bbbbbbbbb","optCatCookies":"bbbbbbb","storage":"ad_storage,ad_user_data,ad_personalization"},
-      {"optCatLabel":"Test","optCatDescription":"ccccccccccccc","optCatCookies":"cccccccccc","storage":"security_storage"}],
+      {"optCatLabel":"Analytical Cookies","optCatDescription":"Analytical cookies help us to improve our website by collecting and reporting information on its usage.","optCatCookies":"a,b,c","storage":"analytics_storage"},
+      {"optCatLabel":"Marketing Cookies","optCatDescription":"We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.","optCatCookies":"d,e,f","storage":"ad_storage,ad_user_data,ad_personalization"},
+      {"optCatLabel":"Test","optCatDescription":"test category","optCatCookies":"g,h,i","storage":"security_storage"}
+    ],
   };
 
 
