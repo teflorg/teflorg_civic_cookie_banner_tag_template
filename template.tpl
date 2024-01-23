@@ -816,6 +816,20 @@ const checkCookie = () => {
   if (typeof settings !== 'undefined' && (typeof settings === 'object' && settings.length > 0)) {
     const settingsObj = JSON.parse(settings[0]).optionalCookies;
     const optionalCookiesConfig = data.optionalCookies;
+    
+    // compare existing optional cookie category names
+    const existingCategoryNames = Object.entries(settingsObj).map(e => e[0]).sort();
+    const templateCategoryNames = optionalCookiesConfig.map(f => f.optCatLabel.toLowerCase().replace(' ','_').trim()).sort();
+    if (!arraysEqual(existingCategoryNames, templateCategoryNames)) {
+      log('Civic Computing: optionalCookie category names mismatched with existing CookieControl cookie. Deleting cookie and will prompt user to consent again.');
+      if (queryPermission('access_globals', 'execute', 'CookieControl.delete')) {
+        callInWindow('CookieControl.delete', COOKIE_NAME);
+        return;
+      } else {
+        log('Civic Computing: CookieControl load failed due to permissions mismatch.');
+        data.gtmOnFailure();
+      }
+    }
     const categoryDefinitions = {};
     if (!!optionalCookiesConfig) {
       optionalCookiesConfig.forEach(config => { categoryDefinitions[config.optCatLabel.toLowerCase().replace(' ','_').trim()] = config.storage; });
@@ -839,6 +853,15 @@ const splitInput = (input) => {
   return input.split(',')
     .map(entry => entry.trim())
     .filter(entry => entry.length !== 0);
+};
+
+// Check if two (sorted) arrays are equal
+const arraysEqual = (a, b) => {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length !== b.length) return false;
+
+  return a.every((val, idx) => val === b[idx]);
 };
 
 // Processes a row of input from the default settings table, returning an
@@ -964,7 +987,6 @@ let config = {
 };
 
 // Set banner initial state in config dependent on URL pathname
-log(data.privacyURL);
 if (getUrl('path') == data.privacyURL) {
   config.initialState = 'closed';
 } else {
@@ -1162,6 +1184,45 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 8,
                     "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "CookieControl.delete"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
                   },
                   {
                     "type": 8,
