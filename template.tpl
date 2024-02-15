@@ -969,7 +969,9 @@ let config = {
   apiKey: data.apiKey,
   product: data.product,
   initialState: data.initialState,
+  notifyOnce: true,
   rejectButton: data.rejectButton,
+  mode: "ccpa",
   closeStyle: "button",
   layout: data.layout,
   position: data.position,
@@ -982,15 +984,17 @@ let config = {
     url: data.privacyURL,
     updated: data.privacyUpdated
   },
+  excludedCountries: "all",
   necessaryCookies: splitInput(data.necessaryCookies),
   optionalCookies: optionalCookieCategories(data.optionalCookies),
+
 };
 
 // Set banner initial state in config dependent on URL pathname
 if (getUrl('path') == data.privacyURL) {
   config.initialState = 'closed';
 } else {
-  config.initialState = 'open';
+  config.initialState = data.initialState;
 }
 
 // Build text object
